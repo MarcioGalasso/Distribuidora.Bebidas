@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit.Kafka" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
+    <PackageReference Include="Scrutor" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Distribuidora.Bebidas.Domain\Distribuidora.Bebidas.Domain.csproj" />
+    <ProjectReference Include="..\..\Core\Distribuidora.Bebidas.Service\Distribuidora.Bebidas.Service.csproj" />
+    <ProjectReference Include="..\Distribuidora.Bebidas.Broker.Kafka\Distribuidora.Bebidas.Kafka.csproj" />
+    <ProjectReference Include="..\Distribuidora.Bebidas.Client\Distribuidora.Bebidas.Client.csproj" />
+    <ProjectReference Include="..\Distribuidora.Bebidas.Repository.Postgresql\Distribuidora.Bebidas.Repository.Postgresql.csproj" />
+  </ItemGroup>
+
+</Project>

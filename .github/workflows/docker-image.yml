@@ -1,0 +1,55 @@
+name: Build, Test, and Deploy Docker Image
+
+on:
+ 
+  pull_request:
+    branches:
+      - '*'  
+
+  push:
+    branches:
+      - main  
+
+jobs:
+  
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0'
+
+      - name: Restore dependencies
+        run: dotnet restore "src/UI/Distribuidora.Bebidas.Api/Distribuidora.Bebidas.Api.csproj"
+
+      - name: Run tests
+        run: dotnet test "src/Tests/Distribuidora.Bebidas.Tests/Distribuidora.Bebidas.Tests.csproj" --configuration Release
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: build_and_test  
+    if: github.event_name == 'push'  
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: "mxogalasso300"
+          password: "dckr_pat_rD93uadqEWrD-dZlD3XQkKn76iE"
+
+      - name: Build Docker image
+        run: |
+          docker build -t mxogalasso300/nstech:${{ github.sha }} -f ./src/UI/Distribuidora.Bebidas.Api/Dockerfile .
+          docker tag mxogalasso300/nstech:${{ github.sha }} mxogalasso300/nstech:latest
+
+      - name: Push Docker image
+        run: |
+          docker push mxogalasso300/nstech:${{ github.sha }}
+          docker push mxogalasso300/nstech:latest
