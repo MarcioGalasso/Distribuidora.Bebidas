@@ -1,5 +1,5 @@
 
-# Microsserviço para solicitações de pedidos (cliente->revenda) com Kafka, PostgreSQL
+# Aplicação para solicitações de pedidos (cliente->revenda) com Kafka, PostgreSQL
 
 ## Visão Geral
 
