@@ -6,10 +6,10 @@
 Este projeto foi criado para atender aos requisitos de um teste técnico, cujo objetivo é criar um microsserviço que recebe solicitação de pedidos e faz integração com o Fornecedor/Fabricante. Utilizando Kafka, PostgreSQL com conteinerização possibilitando a utilização do kubernetes .
 
 O serviço realiza as seguintes operações:
-- Recebe solicitações de pedido via api, insere na base PostgreSQL e envia um evento de delivery no  Kafka para integração.
+- Recebe solicitações de pedido via api, insere na base PostgreSQL e envia um evento de delivery no  Kafka para integração fornecedor/fabricante.
 - Valida a quantidade de itens conforme regra do fornecedor.
 - Gestão de status do pedido: Pendente, Preparação, Transito, Entregue.
-- Integração de delivery pode seguir caminhoes secundarios.
+- Integração de delivery pode seguir fluxos secundarios.
   - Se a integração com o fornecedor tiver alguma instabilidade, é postado um evento de retentativa no Kafka para um consumidor expecifico tratar.
   - Se a integração ocorrer com sucesso é postado um evento de preparação do delivery no kafka para que o proximo passo do delivery seja executado por um outro consumidor/dominio.
 
